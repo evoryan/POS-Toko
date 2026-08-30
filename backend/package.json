@@ -1,0 +1,32 @@
+{
+  "name": "pos-toko-akbar-backend",
+  "version": "1.0.0",
+  "description": "Lightweight REST API backend for POS Toko Akbar Media Group optimized for 2GB RAM Ubuntu Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "pm2": "pm2 start ecosystem.config.js",
+    "seed": "node scripts/seed.js"
+  },
+  "keywords": ["pos", "point-of-sale", "express", "mysql", "toko-akbar"],
+  "author": "Akbar Media Group",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

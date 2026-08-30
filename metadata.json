@@ -1,0 +1,6 @@
+{
+  "name": "POS Toko Akbar",
+  "description": "Aplikasi Point of Sale Toko dengan cetak struk, scan barcode, manajemen stok otomatis, laporan penjualan harian, dan sinkronisasi backend realtime.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

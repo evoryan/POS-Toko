@@ -1,0 +1,31 @@
+# MySQL / MariaDB Low Memory Optimization for 2GB RAM Ubuntu VPS
+# Place this file in /etc/mysql/conf.d/low-ram.cnf or /etc/mysql/mariadb.conf.d/99-low-ram.cnf
+
+[mysqld]
+# 1. Memory and Buffer Settings (Consumes ~250MB-350MB RAM total)
+innodb_buffer_pool_size = 256M
+innodb_log_buffer_size = 8M
+innodb_buffer_pool_instances = 1
+innodb_flush_log_at_trx_commit = 2
+
+# 2. Connection Settings
+max_connections = 50
+max_user_connections = 40
+thread_cache_size = 8
+table_open_cache = 400
+table_definition_cache = 400
+
+# 3. Per-Thread Buffers (Keeps per-query RAM low)
+sort_buffer_size = 512K
+read_buffer_size = 256K
+read_rnd_buffer_size = 512K
+join_buffer_size = 512K
+tmp_table_size = 16M
+max_heap_table_size = 16M
+
+# 4. Binary Logging (Disable or limit to save disk and memory)
+expire_logs_days = 3
+max_binlog_size = 50M
+
+# 5. Disable Performance Schema on 2GB RAM to save ~150MB - 300MB RAM!
+performance_schema = OFF

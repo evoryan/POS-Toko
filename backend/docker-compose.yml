@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service (Optimized for 2GB RAM VPS)
+  db:
+    image: mysql:8.0-debian
+    container_name: pos_akbar_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pos_root_password_2026
+      MYSQL_DATABASE: pos_akbar
+      MYSQL_USER: pos_user
+      MYSQL_PASSWORD: pos_secure_password_2026
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./mysql-low-ram.cnf:/etc/mysql/conf.d/low-ram.cnf
+    deploy:
+      resources:
+        limits:
+          memory: 450M
+    command: --performance-schema=OFF --innodb-buffer-pool-size=128M
+
+  # Express Node.js API Service
+  api:
+    build: .
+    container_name: pos_akbar_api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PORT: 4750
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: pos_user
+      DB_PASSWORD: pos_secure_password_2026
+      DB_NAME: pos_akbar
+      JWT_SECRET: super_secret_jwt_key_toko_akbar_media_group_2026!@#
+      STORE_NAME: "Toko Akbar Media Group"
+    ports:
+      - "4750:4750"
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+
+volumes:
+  db_data:
